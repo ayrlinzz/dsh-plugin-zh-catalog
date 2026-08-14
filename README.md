@@ -4,6 +4,8 @@
 
 > 📷 使用位置：设置（Settings）→ 插件（Plugins）→「中文说明」标签页。
 
+> 🔗 **出处声明**：本仓库为**基于多款开源项目的二次开发（整合）作品**（上游：DeepSeek Harness / Koishi Cordis / React，均为 MIT），详见文末 [出处与开源声明](#-出处与开源声明)（含作者原创部分说明）。
+
 ## 📖 这是什么？
 
 DSH Web 的「设置 → 插件」页里有一堆英文插件名（`@deepseek-ai/dsh-xxx`），普通人根本看不懂是干嘛的。本插件在旁边加了一个 **「中文说明」** 标签页，把每个插件翻译成中文名 + 一句话功能简介：
@@ -38,7 +40,7 @@ DSH 插件通过 profile 的 `cordis.patch.yml` 挂载。本插件是纯浏览�
 
 ```sh
 # 1) 把仓库加入 Web profile 作为插件
-dsh plugin --profile web add git+https://github.com/<你的用户名>/dsh-plugin-zh-catalog.git
+dsh plugin --profile web add git+https://github.com/ayrlinzz/dsh-plugin-zh-catalog.git
 
 # 2) 在 $DSH_HOME/profiles/web/cordis.patch.yml 追加一行（若 dsh plugin 未自动 reconcile）：
 # - insert:
@@ -85,6 +87,30 @@ dsh-plugin-zh-catalog/
 ```
 
 新增或更新插件后，可编辑该对象补充 `{ moduleName: { zh, desc } }`，刷新页面即生效。
+
+## 🔗 出处与开源声明
+
+本项目是**基于多款开源项目的二次开发（整合）作品**，由 [ayrlinzz](https://github.com/ayrlinzz) 整理并开源。
+
+### 上游开源项目
+
+| 上游项目 | 在本仓库中的角色 | 许可证 |
+|---|---|---|
+| [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) | 基础平台：插件协议（`dsh.client`）、Web UI「设置 → 插件」页与 `pluginInventory/list` 数据源、`@deepseek-ai/dsh-api-remotes`、`@deepseek-ai/dsh-client-ui-settings` 等扩展点 | MIT |
+| [Koishi Cordis](https://github.com/koishijs/cordis) | 插件/依赖注入框架，`cordis.patch.yml` 挂载机制（DSH 内置分支 `@deepseek-ai/cordis`） | MIT |
+| [React](https://github.com/facebook/react) | 浏览器半 UI 渲染（peerDependencies `^18.2.0`） | MIT |
+
+### 作者原创部分（ayrlinzz）
+
+- **插件本体代码**（「中文说明」标签页 UI、Host 半 `/zh-catalog/describe` 接口、AI 总结与缓存逻辑）为作者**原创编写**。
+- **内置中文说明目录**（128 个 `@deepseek-ai/*` 模块的 `{zh, desc}` 条目）由作者组织 AI 依据各包 README 与 `package.json.description` 总结整理而成；原始内容版权归 DeepSeek Harness 团队，中文概括与整理为本仓库作者成果。
+
+### 声明
+
+- 本仓库代码是在 DeepSeek Harness 开放插件体系上进行的**二次开发**：仅使用其公开 API 与扩展点（`pluginInventory/list`、Host 半路由、`settings.section` slot）。
+- 内置「中文说明」目录的**内容源自** DSH 各 `@deepseek-ai/*` 内置包的 README 与 `package.json.description`（由 AI 阅读后总结生成），原始版权归 DeepSeek Harness 团队所有。
+- 上述**作者原创部分**（插件逻辑、界面、目录缓存逻辑）以 **MIT** 许可证发布（见 [LICENSE](LICENSE)），与上游一致；二次修改与再分发时请保留本声明及上游出处。
+- 致谢：感谢 DeepSeek Harness 团队与所有上游开源社区的贡献。
 
 ## 📄 许可证
 
